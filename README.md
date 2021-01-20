@@ -1,2 +1,2 @@
-##### initialization after a forced push
+##### initialization after a force push
 ###### so far empty -_o
