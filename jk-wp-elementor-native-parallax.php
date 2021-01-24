@@ -16,10 +16,15 @@ final class JK_WP_ELEMENTOR_NATIVE_PARALLAX
 
     public static function instance()
     {
+
         if (is_null(self::$_instance)) :
+
             self::$_instance = new self();
+
         endif;
+
         return self::$_instance;
+
     }
 
     public function register_controls($element)
@@ -190,24 +195,39 @@ final class JK_WP_ELEMENTOR_NATIVE_PARALLAX
     {
 
         $data = $element->get_data();
+
         $type = $data['elType'];
+
         $settings = $data['settings'];
+
         $parallax = isset($settings['parallax_type']) ? $settings['parallax_type'] : '';
 
         if ('section' === $type && isset($parallax) && '' !== $parallax && 'yes' === $element->get_settings('parallax_switcher')) :
+
             $android = (isset($settings['parallax_android_support']) && $settings['parallax_android_support'] == 'yes') ? 0 : 1;
+
             $ios = (isset($settings['parallax_ios_support']) && $settings['parallax_ios_support'] == 'yes') ? 0 : 1;
+
             $speed = !empty($settings['parallax_speed']) ? $settings['parallax_speed'] : 0.5;
+
             ?>
+
             <script>
+
                 jQuery(document).ready(function ($) {
+
                     "use strict";
+
                     let target = $('.elementor-element-<?php echo esc_js($element->get_id()); ?>');
+
                     <?php if( 'automove' != $parallax && 'multi' != $parallax ) : ?>
+
                     let ParallaxElement = {
+
                         init: function () {
                             elementorFrontend.hooks.addAction('frontend/element_ready/global', ParallaxElement.initWidget);
                         },
+
                         responsiveParallax: function () {
                             let android = <?php echo esc_js($android); ?>,
                                 ios = <?php echo esc_js($ios); ?>;
@@ -225,6 +245,7 @@ final class JK_WP_ELEMENTOR_NATIVE_PARALLAX
                                     return null;
                             }
                         },
+
                         initWidget: function ($scope) {
                             target.jarallax({
                                 type: '<?php echo esc_js($parallax); ?>',
@@ -233,13 +254,21 @@ final class JK_WP_ELEMENTOR_NATIVE_PARALLAX
                                 disableParallax: ParallaxElement.responsiveParallax(),
                             });
                         }
+
                     };
+
                     $(window).on('elementor/frontend/init', ParallaxElement.init);
+
                     <?php endif; ?>
+
                 });
+
             </script>
+
         <?php endif; ?>
+
         <?php
+
     }
 
 }
