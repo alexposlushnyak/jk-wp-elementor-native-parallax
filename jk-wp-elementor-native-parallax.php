@@ -225,34 +225,46 @@ final class JK_WP_ELEMENTOR_NATIVE_PARALLAX
                     let ParallaxElement = {
 
                         init: function () {
+
                             elementorFrontend.hooks.addAction('frontend/element_ready/global', ParallaxElement.initWidget);
+
                         },
 
                         responsiveParallax: function () {
+
                             let android = <?php echo esc_js($android); ?>,
                                 ios = <?php echo esc_js($ios); ?>;
+
                             switch (true || 1) {
+
                                 case android && ios:
                                     return /iPad|iPhone|iPod|Android/;
                                     break;
+
                                 case android && !ios:
                                     return /Android/;
                                     break;
+
                                 case !android && ios:
                                     return /iPad|iPhone|iPod/;
                                     break;
+
                                 case (!android && !ios):
                                     return null;
+
                             }
+
                         },
 
                         initWidget: function ($scope) {
+
                             target.jarallax({
                                 type: '<?php echo esc_js($parallax); ?>',
                                 speed: <?php echo esc_js($speed); ?>,
                                 keepImg: true,
                                 disableParallax: ParallaxElement.responsiveParallax(),
                             });
+
                         }
 
                     };
