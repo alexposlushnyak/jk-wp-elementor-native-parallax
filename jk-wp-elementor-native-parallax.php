@@ -1,6 +1,8 @@
 <?php defined('ABSPATH') || exit;
 
-final class JK_WP_ELEMENTOR_NATIVE_PARALLAX
+$path = __DIR__;
+
+final class jk_wp_elementor_native_parallax
 {
 
     public function __construct()
@@ -285,4 +287,4 @@ final class JK_WP_ELEMENTOR_NATIVE_PARALLAX
 
 }
 
-JK_WP_ELEMENTOR_NATIVE_PARALLAX::instance();
+jk_wp_elementor_native_parallax::instance();
